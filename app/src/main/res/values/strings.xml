@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Birthday Card</string>
+    <string name="hbd_2_u">HBD</string>
+    <string name="de_parte_de">De parte de %1$s</string>
 </resources>

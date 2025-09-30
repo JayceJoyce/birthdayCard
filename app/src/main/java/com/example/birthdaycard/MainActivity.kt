@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,35 +47,41 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingImage(Message:String,From:String,modifier: Modifier){
     val greetingImage = painterResource(R.drawable.androidparty)
-    Box (Modifier){
+    Box ( modifier = Modifier){
         Image(
             painter = greetingImage,
             contentDescription = null,//es el equivalente al alt, pero en este caso como es decorativa no lleva
             contentScale = ContentScale.Crop,
             alpha = 0.9F
         )
-        GreetingText("HBD 2 u","Els",Modifier.padding(8.dp))
+        GreetingText(stringResource(R.string.hbd_2_u),"Els",Modifier.padding(8.dp))
     }
 }
 @Composable
-fun GreetingText(message:String,from:String,modifier:Modifier=Modifier){
-    Column (verticalArrangement = Arrangement.Center, modifier = modifier){
+fun GreetingText(message:String,from:String,modifier: Modifier){
+    Column (verticalArrangement = Arrangement.Center, modifier = modifier
+        .fillMaxSize()
+        .padding(8.dp)){
         //buena práctica: incremento de padding cada 4dp
         Text(
             message,
             fontSize = 100.sp, //pixeles escalables
             lineHeight = 116.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
         )
         Text(
-            text = "De parte de $from",
+            text = stringResource(R.string.de_parte_de, from),
+            fontSize = 36.sp,
             modifier = Modifier
                 .padding(18.dp)
-                .align(alignment = Alignment.End)
+                .align(alignment = Alignment.CenterHorizontally)
         )
     }
 
 }
+
+fun Modifier.Companion.align(alignment: Alignment) {}
 
 @Preview(showBackground = true)
 @Composable
